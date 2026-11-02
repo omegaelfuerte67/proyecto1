@@ -61,6 +61,17 @@ class Database:
                     FOREIGN KEY(rut_paciente) REFERENCES paciente(rut) ON DELETE CASCADE
                 )
             """)
+            # Tabla Usuario (Semana 12: Inicio de sesión con credenciales encriptadas)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS usuario (
+                    id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT NOT NULL UNIQUE,
+                    password_hash TEXT NOT NULL,
+                    nombre_completo TEXT NOT NULL,
+                    rol TEXT NOT NULL
+                )
+            """)
+            
             conn.commit()
         except sqlite3.Error as e:
             print(f"Error al inicializar la base de datos: {e}")
